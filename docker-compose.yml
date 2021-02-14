@@ -8,3 +8,4 @@ services:
     environment:
       POSTGRES_USER: murg
       POSTGRES_PASSWORD: tom-nook-stalks
+      POSTGRES_DB: nse

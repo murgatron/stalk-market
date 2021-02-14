@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using models.Villager;
+using Models.Villager;
+using Interfaces.IVillagerRepository;
 
 namespace server.Controllers
 {
@@ -10,6 +11,11 @@ namespace server.Controllers
     [Route("api/v1/villagers")]
     public class VillagerController : ControllerBase
     {
+        private readonly IVillagerRepository _repository;
+        public VillagerController(IVillagerRepository repository)
+        {
+            _repository = repository;
+        }
         private readonly ILogger<VillagerController> _logger;
 
         public VillagerController(ILogger<VillagerController> logger)

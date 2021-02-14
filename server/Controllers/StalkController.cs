@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using models.Stalk;
+using Models.Stalk;
 
 namespace server.Controllers
 {
@@ -27,7 +27,7 @@ namespace server.Controllers
                     Id = new Guid(),
                     IslandId = new Guid(),
                     Meridian = Meridian.AM,
-                    BellPrice = 120,
+                    ShopPrice = 120,
                     Date = new DateTime(),
                     EnteredBy = new Guid()
                 }

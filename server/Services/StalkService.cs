@@ -1,4 +1,4 @@
-namespace services.StalkService
+namespace Services.StalkService
 {
     public class StalkService
     {

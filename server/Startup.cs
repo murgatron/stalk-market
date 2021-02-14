@@ -1,9 +1,13 @@
+using FluentMigrator.Runner;
+using Interfaces.IVillagerRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Migrations;
+using Repositories.BasicRepository;
 
 namespace server
 {
@@ -25,6 +29,19 @@ namespace server
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "stalks", Version = "v1" });
             });
+
+            services.AddFluentMigratorCore()
+                .ConfigureRunner(rb => rb
+                    // Add SQLite support to FluentMigrator
+                    .AddPostgres()
+                    // Set the connection string
+                    .WithGlobalConnectionString("Server=127.0.0.1;Port=5432;Database=nse;User Id=murg;Password=tom-nook-stalks;")
+                    // Define the assembly containing the migrations
+                    .ScanIn(typeof(InitialMigration).Assembly).For.Migrations())
+                // Enable logging to console in the FluentMigrator way
+                .AddLogging(lb => lb.AddFluentMigratorConsole());
+
+            services.AddSingleton<IVillagerRepository, VillagerRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
