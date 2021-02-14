@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Interfaces.IVillagerRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Models.Villager;
-using Interfaces.IVillagerRepository;
 
 namespace server.Controllers
 {
@@ -28,15 +28,7 @@ namespace server.Controllers
         {
             _logger.LogInformation("Get villager info");
 
-            var villagerList = new List<Villager>
-            {
-                new Villager
-                {
-                    Id = new Guid(),
-                    Name = "Murg"
-                }
-            };
-            return villagerList;
+            return _repository.GetVillagers();
         }
     }
 }
