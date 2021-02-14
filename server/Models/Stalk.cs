@@ -10,11 +10,11 @@ namespace models.Stalk
 
     public class Stalk
     {
-        public Guid id;
-        public Guid islandId;
-        public Meridian meridian;
-        public int bellPrice;
-        public DateTime date;
-        public Guid enteredBy;
+        public Guid Id { get; set; }
+        public Guid IslandId { get; set; }
+        public Meridian Meridian { get; set; }
+        public int BellPrice { get; set; }
+        public DateTime Date { get; set; }
+        public Guid EnteredBy { get; set; }
     }
 }

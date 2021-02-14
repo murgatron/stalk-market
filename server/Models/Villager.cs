@@ -4,9 +4,7 @@ namespace models.Villager
 {
     public class Villager
     {
-        public Guid id;
-
-        public string name;
-
+        public Guid Id { get; set; }
+        public string Name { get; set; }
     }
 }

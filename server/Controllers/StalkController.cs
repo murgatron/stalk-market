@@ -18,21 +18,21 @@ namespace server.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Stalk> Get()
+        public ActionResult<IEnumerable<Stalk>> Get()
         {
-            var stalkList = new List<Stalk>();
-
-            stalkList.Add(new Stalk
-            {
-                id = new Guid(),
-                islandId = new Guid(),
-                meridian = Meridian.AM,
-                bellPrice = 120,
-                date = new DateTime(),
-                enteredBy = new Guid()
-            });
-
-            return stalkList;
+            _logger.LogInformation("STALKS");
+            var stalkList = new List<Stalk> {
+                new Stalk
+                {
+                    Id = new Guid(),
+                    IslandId = new Guid(),
+                    Meridian = Meridian.AM,
+                    BellPrice = 120,
+                    Date = new DateTime(),
+                    EnteredBy = new Guid()
+                }
+            };
+            return Ok(stalkList);
         }
     }
 }

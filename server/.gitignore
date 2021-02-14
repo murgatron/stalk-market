@@ -1,3 +1,4 @@
 /obj
 /bin
 /obj/Debug
+/server.tests/obj

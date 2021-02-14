@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using models.Island;
@@ -24,13 +22,17 @@ namespace server.Controllers
         {
             _logger.LogInformation("Getting Island Information");
 
-            var islandList = new List<Island>();
-            islandList.Add(new Island
+            var islandList = new List<Island>
             {
-                id = new Guid(),
-                name = "Teatime",
-                owner = new Guid()
-            });
+                new Island
+                {
+                    Id = new Guid(),
+                    Name = "Teatime",
+                    Owner = new Guid()
+                }
+            };
+
+            _logger.LogInformation(islandList.ToString());
             return islandList;
         }
     }
