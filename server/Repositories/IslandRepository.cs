@@ -36,9 +36,9 @@ namespace Repositories
         public IEnumerable<Island> CreateIsland(CreateIsland createIsland)
         {
             string sql = new StringBuilder()
-            .Append($"insert into {TABLE_NAME} (id, name, owner_id, hemisphere, region, purchase_tax) ")
-            .Append($"values (@Id, @Name, @OwnerId, @Hemisphere, @Region, @PurchaseTax) ")
-            .Append("returning (id, name, owner_id, hemisphere, region, purchase_tax);").ToString();
+            .Append($"insert into {TABLE_NAME} (name, owner_id, hemisphere, region, sales_tax) ")
+            .Append($"values (@Name, @OwnerId, @Hemisphere, @Region, @SalesTax) ")
+            .Append("returning (id, name, owner_id, hemisphere, region, sales_tax);").ToString();
 
             using (var connection = new NpgsqlConnection(DbConfiguration.PG_CONNECTION))
             {
@@ -50,9 +50,9 @@ namespace Repositories
         public IEnumerable<Island> UpdateIsland(Guid islandId, CreateIsland updatePayload)
         {
             string sql = new StringBuilder().Append($"update {TABLE_NAME} ")
-                .Append("set name = @Name, owner_id = @OwnerId, hemisphere = @Hemisphere, region = @Region, purchase_tax = @PurchaseTax")
+                .Append("set name = @Name, owner_id = @OwnerId, hemisphere = @Hemisphere, region = @Region, sales_tax = @SalesTax")
                 .Append("where id = @Id ")
-                .Append("returning (id, name, owner_id, hemisphere, region, purchase_tax);")
+                .Append("returning (id, name, owner_id, hemisphere, region, sales_tax);")
                 .ToString();
 
             using (var connection = new NpgsqlConnection(DbConfiguration.PG_CONNECTION))

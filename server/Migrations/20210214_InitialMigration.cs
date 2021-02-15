@@ -24,11 +24,12 @@ namespace Migrations
                 .WithColumn("owner_id").AsGuid()
                 .WithColumn("region").AsString()
                 .WithColumn("hemisphere").AsString()
-                .WithColumn("purchase_tax").AsInt64().Nullable();
+                .WithColumn("sales_tax").AsInt64().Nullable();
 
             Create.Table("stalk").InSchema("stalkmarket")
                 .WithColumn("id").AsGuid().PrimaryKey().WithDefaultValue(SystemMethods.NewGuid)
                 .WithColumn("date").AsDate()
+                .WithColumn("shop_price").AsString()
                 .WithColumn("meridian").AsFixedLengthString(2)
                 .WithColumn("island_id").AsGuid()
                 .WithColumn("entered_by").AsGuid();
@@ -38,6 +39,7 @@ namespace Migrations
                 .WithColumn("id").AsGuid().PrimaryKey().WithDefaultValue(SystemMethods.NewGuid)
                 .WithColumn("price").AsString()
                 .WithColumn("on_island").AsGuid()
+                .WithColumn("type").AsString()
                 .WithColumn("villager_id").AsGuid()
                 .WithColumn("quantity").AsString()
                 .WithColumn("timestamp").AsDateTime();

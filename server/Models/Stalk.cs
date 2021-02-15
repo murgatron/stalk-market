@@ -1,13 +1,8 @@
 using System;
+using Enums;
 
 namespace Models.Stalk
 {
-    public enum Meridian
-    {
-        AM,
-        PM
-    }
-
     // Could probably pick a better name for this but whatever
     public class Stalk
     {

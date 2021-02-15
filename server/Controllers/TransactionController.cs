@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Models.Transaction;
 using Models.CreateTransaction;
+using Models.Transaction;
 using Repositories.Interfaces;
 
 namespace server.Controllers
@@ -54,7 +54,7 @@ namespace server.Controllers
             }
         }
 
-        [HttpPatch("{transactionId}")]
+        [HttpDelete("{transactionId}")]
         [Produces("application/json")]
         public ActionResult Delete(
             [FromRoute] Guid transactionId)

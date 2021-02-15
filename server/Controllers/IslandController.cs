@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Models.Island;
 using Models.CreateIsland;
+using Models.Island;
 using Repositories.Interfaces;
 
 namespace server.Controllers
@@ -68,7 +68,7 @@ namespace server.Controllers
             }
         }
 
-        [HttpPatch("{islandId}")]
+        [HttpDelete("{islandId}")]
         [Produces("application/json")]
         public ActionResult Delete(
             [FromRoute] Guid islandId)

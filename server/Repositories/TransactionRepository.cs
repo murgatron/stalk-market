@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Dapper;
 using Microsoft.Extensions.Logging;
 using Models.CreateTransaction;
@@ -33,8 +34,10 @@ namespace Repositories
 
         public IEnumerable<Transaction> CreateTransaction(CreateTransaction createTransaction)
         {
-
-            string sql = $"insert into {TABLE_NAME} (id, name) values (@Id, @Name) returning (id, name);";
+            string sql = new StringBuilder()
+            .Append($"insert into {TABLE_NAME} (price, type, on_island, villager_id, quantity, timestamp) ")
+            .Append("values (@Price, @Type, @OnIsland, @VillagerId, @Quantity, @Timestamp) ")
+            .Append("returning (id, name, type, on_island, villager_id, quantity, timestamp);").ToString();
 
             using (var connection = new NpgsqlConnection(DbConfiguration.PG_CONNECTION))
             {

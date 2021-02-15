@@ -7,6 +7,7 @@ using Models.CreateStalk;
 using Models.Stalk;
 using Npgsql;
 using Repositories.Interfaces;
+using System.Text;
 
 namespace Repositories
 {
@@ -32,8 +33,10 @@ namespace Repositories
 
         public IEnumerable<Stalk> CreateStalk(CreateStalk createStalk)
         {
-
-            string sql = $"insert into {TABLE_NAME} (id, name) values (@Id, @Name) returning (id, name);";
+            string sql = new StringBuilder()
+            .Append($"insert into {TABLE_NAME} (island_id, meridian, shop_price, date, entered_by) ")
+            .Append("values (@IslandId, @Meridian, @ShopPrice, @Date, @EnteredBy) ")
+            .Append("returning (id, island_id, meridian, shop_price, date, entered_by);").ToString();
 
             using (var connection = new NpgsqlConnection(DbConfiguration.PG_CONNECTION))
             {
