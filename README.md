@@ -4,6 +4,8 @@ Tool for tracking turnip prices &amp; displaying visualizations.
 
 If you have no idea what this means, check out _Animal Crossing: New Horizons_. 
 
+still under active development, so it may be broken at any given time if you try to pull. 
+
 # about
 
 .NET 5 backend/API, react frontend
