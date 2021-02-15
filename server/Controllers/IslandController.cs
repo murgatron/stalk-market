@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Models.Island;
+using Repositories.Interfaces.IIslandRepository;
 
 namespace server.Controllers
 {
@@ -11,28 +11,19 @@ namespace server.Controllers
     public class IslandController : ControllerBase
     {
         private readonly ILogger<IslandController> _logger;
+        private readonly IIslandRepository _repository;
 
-        public IslandController(ILogger<IslandController> logger)
+        public IslandController(ILogger<IslandController> logger, IIslandRepository repository)
         {
             _logger = logger;
+            _repository = repository;
         }
 
         [HttpGet]
         public IEnumerable<Island> Get()
         {
             _logger.LogInformation("Getting Island Information");
-
-            var islandList = new List<Island>
-            {
-                new Island
-                {
-                    Id = new Guid(),
-                    Name = "Teatime",
-                    Owner = new Guid()
-                }
-            };
-
-            _logger.LogInformation(islandList.ToString());
+            var islandList = _repository.GetIslands();
             return islandList;
         }
     }

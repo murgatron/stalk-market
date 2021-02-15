@@ -1,4 +1,5 @@
 using FluentMigrator.Runner;
+using FluentMigrator.Runner.Initialization;
 using Interfaces.IVillagerRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Migrations;
-using Repositories.BasicRepository;
+using Repositories.VillagerRepository;
 
 namespace server
 {
@@ -32,12 +33,14 @@ namespace server
 
             services.AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
-                    // Add SQLite support to FluentMigrator
+                    // Add Postgres support to FluentMigrator
                     .AddPostgres()
                     // Set the connection string
                     .WithGlobalConnectionString("Server=127.0.0.1;Port=5432;Database=nse;User Id=murg;Password=tom-nook-stalks;")
                     // Define the assembly containing the migrations
                     .ScanIn(typeof(InitialMigration).Assembly).For.Migrations())
+                // TODO make this read from some config
+                .Configure<RunnerOptions>(cfg => { cfg.Profile = "Development"; })
                 // Enable logging to console in the FluentMigrator way
                 .AddLogging(lb => lb.AddFluentMigratorConsole());
 

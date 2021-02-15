@@ -1,7 +1,6 @@
 using System;
 using FluentMigrator;
 
-
 namespace Seeds.DevSeed
 {
     [Profile("Development")]
@@ -9,32 +8,38 @@ namespace Seeds.DevSeed
     {
         public override void Up()
         {
-            var murgId = new Guid();
-            var teatimeId = new Guid();
+            var murgId = Guid.NewGuid();
+            var teatimeId = Guid.NewGuid();
 
-            Insert.IntoTable("villager").Row(new
+            Insert.IntoTable("villager")
+            .InSchema("stalkmarket")
+            .Row(new
             {
-                Id = murgId,
-                Name = "Murg"
+                id = murgId,
+                name = "Murg"
             });
 
-            Insert.IntoTable("island").Row(new
+            Insert.IntoTable("island")
+            .InSchema("stalkmarket")
+            .Row(new
             {
-                Id = teatimeId,
-                Name = "Teatime",
-                OwnerId = murgId,
-                Hemisphere = "North",
-                Region = "NA"
+                id = teatimeId,
+                name = "Teatime",
+                owner_id = murgId,
+                hemisphere = "North",
+                region = "NA"
             });
 
-            Insert.IntoTable("buy").Row(new
+            Insert.IntoTable("buy")
+            .InSchema("stalkmarket")
+            .Row(new
             {
-                Id = new Guid(),
-                Price = 92,
-                OnIsland = teatimeId,
-                Buyer = murgId,
-                Quantity = 300,
-                BuyDate = DateTime.Parse("2021-02-13T17:51:42+0000")
+                id = Guid.NewGuid(),
+                price = 92,
+                on_island = teatimeId,
+                buyer = murgId,
+                quantity = 300,
+                buy_date = DateTime.Parse("2021-02-13T17:51:42+0000")
             });
         }
 

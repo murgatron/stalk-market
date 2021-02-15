@@ -1,9 +1,9 @@
 using System;
+using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
-using FluentMigrator.Runner;
 
 namespace server
 {
@@ -36,7 +36,6 @@ namespace server
         {
             // Instantiate the runner
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
-
             // Execute the migrations
             runner.MigrateUp();
         }

@@ -1,4 +1,5 @@
 using FluentMigrator;
+using System;
 
 namespace Migrations
 {
@@ -7,15 +8,17 @@ namespace Migrations
     {
         public override void Up()
         {
+            
+            // TODO unique constraints
 
             Create.Schema("stalkmarket");
 
             Create.Table("villager").InSchema("stalkmarket")
-                .WithColumn("id").AsGuid().PrimaryKey()
+                .WithColumn("id").AsGuid().PrimaryKey().WithDefaultValue(SystemMethods.NewGuid)
                 .WithColumn("name").AsString();
 
             Create.Table("island").InSchema("stalkmarket")
-                .WithColumn("id").AsGuid().PrimaryKey()
+                .WithColumn("id").AsGuid().PrimaryKey().WithDefaultValue(SystemMethods.NewGuid)
                 .WithColumn("name").AsString()
                 .WithColumn("owner_id").AsGuid()
                 .WithColumn("region").AsString()
@@ -23,7 +26,7 @@ namespace Migrations
                 .WithColumn("purchase_tax").AsInt64().Nullable();
 
             Create.Table("stalk").InSchema("stalkmarket")
-                .WithColumn("id").AsGuid().PrimaryKey()
+                .WithColumn("id").AsGuid().PrimaryKey().WithDefaultValue(SystemMethods.NewGuid)
                 .WithColumn("date").AsDate()
                 .WithColumn("meridian").AsFixedLengthString(2)
                 .WithColumn("island_id").AsGuid()
@@ -31,7 +34,7 @@ namespace Migrations
 
             // TODO: combine these tables? 
             Create.Table("buy").InSchema("stalkmarket")
-                .WithColumn("id").AsGuid().PrimaryKey()
+                .WithColumn("id").AsGuid().PrimaryKey().WithDefaultValue(SystemMethods.NewGuid)
                 .WithColumn("price").AsString()
                 .WithColumn("on_island").AsGuid()
                 .WithColumn("buyer").AsGuid()
@@ -39,7 +42,7 @@ namespace Migrations
                 .WithColumn("buy_date").AsDateTime();
 
             Create.Table("sell").InSchema("stalkmarket")
-                .WithColumn("id").AsGuid().PrimaryKey()
+                .WithColumn("id").AsGuid().PrimaryKey().WithDefaultValue(SystemMethods.NewGuid)
                 .WithColumn("price").AsString()
                 .WithColumn("on_island").AsGuid()
                 .WithColumn("seller").AsGuid()

@@ -1,16 +1,15 @@
 using System;
 using Enums;
 
-namespace Models.Island
+namespace Models.CreateIsland
 {
-    public class Island
+    public class CreateIsland
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         // Some people charge for buying on their island
         public int? PurchaseTax { get; set; }
         // Who owns the island
-        public Guid OwnerId { get; set; }
+        public Guid Owner { get; set; }
         // Separate from Region as players can change Island Hemisphere regardless of geo location
         public Hemisphere Hemisphere { get; set; }
         // Real world gameplay region

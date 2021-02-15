@@ -1,22 +1,13 @@
 using System;
+using Enums;
 
 namespace Models.Activity
 {
-    public enum Action
-    {
-        Buy,
-        Sell,
-        CreateIsland,
-        UpdateIsland,
-        CreateVillager,
-        UpdateVillager,
-        RegisterStalk
-    }
 
     public class Activity
     {
         public Guid Actor;
-        public Action Action;
+        public Enums.Action Action;
         public string[] Values;
         public DateTime Timestamp;
     }
