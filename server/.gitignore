@@ -1,4 +1,5 @@
 /obj
 /bin
 /obj/Debug
-/server.tests/obj
+/Tests/obj
+/Tests/bin
