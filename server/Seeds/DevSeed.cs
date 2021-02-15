@@ -1,4 +1,5 @@
 using System;
+using Enums;
 using FluentMigrator;
 
 namespace Seeds.DevSeed
@@ -30,16 +31,17 @@ namespace Seeds.DevSeed
                 region = "NA"
             });
 
-            Insert.IntoTable("buy")
+            Insert.IntoTable("stalk_transaction")
             .InSchema("stalkmarket")
             .Row(new
             {
                 id = Guid.NewGuid(),
                 price = 92,
                 on_island = teatimeId,
-                buyer = murgId,
+                type = TransactionType.Buy,
+                villager_id = murgId,
                 quantity = 300,
-                buy_date = DateTime.Parse("2021-02-13T17:51:42+0000")
+                timestamp = DateTime.Parse("2021-02-13T17:51:42+0000")
             });
         }
 

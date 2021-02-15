@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Dapper;
-using Repositories.Interfaces.IVillagerRepository;
 using Microsoft.Extensions.Logging;
-using Models.Villager;
 using Models.CreateVillager;
+using Models.Villager;
 using Npgsql;
+using Repositories.Interfaces;
 
-namespace Repositories.VillagerRepository
+namespace Repositories
 {
     public class VillagerRepository : IVillagerRepository
     {
@@ -26,11 +26,7 @@ namespace Repositories.VillagerRepository
 
             using (var connection = new NpgsqlConnection(DbConfiguration.PG_CONNECTION))
             {
-                var villagers = connection.Query<Villager>(sql).ToList();
-
-                Console.WriteLine(villagers.Count);
-
-                return villagers;
+                return connection.Query<Villager>(sql).ToList();
             }
         }
 
@@ -42,8 +38,7 @@ namespace Repositories.VillagerRepository
             using (var connection = new NpgsqlConnection(DbConfiguration.PG_CONNECTION))
             {
                 _logger.LogInformation($"Creating villager with name {villagerToCreate.Name}");
-                var createdVillager = connection.Query<Villager>(sql, villagerToCreate);
-                return createdVillager;
+                return connection.Query<Villager>(sql, villagerToCreate);
             }
         }
 
@@ -55,8 +50,7 @@ namespace Repositories.VillagerRepository
             using (var connection = new NpgsqlConnection(DbConfiguration.PG_CONNECTION))
             {
                 _logger.LogInformation($"Updating villager with id {villagerId}");
-                var updatedVillager = connection.Query<Villager>(sql, villagerToUpdate);
-                return updatedVillager;
+                return connection.Query<Villager>(sql, villagerToUpdate);
             }
         }
 
@@ -66,7 +60,7 @@ namespace Repositories.VillagerRepository
 
             using (var connection = new NpgsqlConnection(DbConfiguration.PG_CONNECTION))
             {
-                Console.WriteLine($"Deleting villager with id {villagerId}");
+                _logger.LogInformation($"Deleting villager with id {villagerId}");
                 connection.Execute(sql, villagerId);
             }
         }

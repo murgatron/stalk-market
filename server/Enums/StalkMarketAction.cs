@@ -1,6 +1,6 @@
 namespace Enums
 {
-    public enum Action
+    public enum StalkMarketAction
     {
         Buy,
         Sell,

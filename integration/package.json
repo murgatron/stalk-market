@@ -1,0 +1,11 @@
+{
+  "name": "stalk-integration",
+  "version": "1.0.0",
+  "description": "integration tests for stalk-market",
+  "main": "index.js",
+  "scripts": {
+    "test": "inttest"
+  },
+  "author": "murgatron",
+  "license": "UNLICENSED"
+}

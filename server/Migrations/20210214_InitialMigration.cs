@@ -1,5 +1,5 @@
-using FluentMigrator;
 using System;
+using FluentMigrator;
 
 namespace Migrations
 {
@@ -8,9 +8,10 @@ namespace Migrations
     {
         public override void Up()
         {
-            
-            // TODO unique constraints
+            // for great good
+            Execute.Sql("create extension if not exists \"uuid-ossp\";");
 
+            // TODO unique constraints
             Create.Schema("stalkmarket");
 
             Create.Table("villager").InSchema("stalkmarket")
@@ -33,21 +34,13 @@ namespace Migrations
                 .WithColumn("entered_by").AsGuid();
 
             // TODO: combine these tables? 
-            Create.Table("buy").InSchema("stalkmarket")
+            Create.Table("stalk_transaction").InSchema("stalkmarket")
                 .WithColumn("id").AsGuid().PrimaryKey().WithDefaultValue(SystemMethods.NewGuid)
                 .WithColumn("price").AsString()
                 .WithColumn("on_island").AsGuid()
-                .WithColumn("buyer").AsGuid()
+                .WithColumn("villager_id").AsGuid()
                 .WithColumn("quantity").AsString()
-                .WithColumn("buy_date").AsDateTime();
-
-            Create.Table("sell").InSchema("stalkmarket")
-                .WithColumn("id").AsGuid().PrimaryKey().WithDefaultValue(SystemMethods.NewGuid)
-                .WithColumn("price").AsString()
-                .WithColumn("on_island").AsGuid()
-                .WithColumn("seller").AsGuid()
-                .WithColumn("quantity").AsString()
-                .WithColumn("sell_date").AsDateTime();
+                .WithColumn("timestamp").AsDateTime();
 
             // Ignore activity for now
 
@@ -69,27 +62,15 @@ namespace Migrations
                 .ToTable("villager").InSchema("stalkmarket")
                 .PrimaryColumn("id");
 
-            Create.ForeignKey("buy_on_island_fk")
-                .FromTable("buy").InSchema("stalkmarket")
+            Create.ForeignKey("transaction_on_island_fk")
+                .FromTable("stalk_transaction").InSchema("stalkmarket")
                 .ForeignColumn("on_island")
                 .ToTable("island").InSchema("stalkmarket")
                 .PrimaryColumn("id");
 
-            Create.ForeignKey("buyer_fk")
-                .FromTable("buy").InSchema("stalkmarket")
-                .ForeignColumn("buyer")
-                .ToTable("villager").InSchema("stalkmarket")
-                .PrimaryColumn("id");
-
-            Create.ForeignKey("sell_on_island_fk")
-                .FromTable("sell").InSchema("stalkmarket")
-                .ForeignColumn("on_island")
-                .ToTable("island").InSchema("stalkmarket")
-                .PrimaryColumn("id");
-
-            Create.ForeignKey("seller_fk")
-                .FromTable("sell").InSchema("stalkmarket")
-                .ForeignColumn("seller")
+            Create.ForeignKey("transaction_villager_id_fk")
+                .FromTable("stalk_transaction").InSchema("stalkmarket")
+                .ForeignColumn("villager_id")
                 .ToTable("villager").InSchema("stalkmarket")
                 .PrimaryColumn("id");
         }

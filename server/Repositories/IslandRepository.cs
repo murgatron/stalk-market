@@ -7,9 +7,9 @@ using Microsoft.Extensions.Logging;
 using Models.CreateIsland;
 using Models.Island;
 using Npgsql;
-using Repositories.Interfaces.IIslandRepository;
+using Repositories.Interfaces;
 
-namespace Repositories.IslandRepository
+namespace Repositories
 {
     public class IslandRepository : IIslandRepository
     {
@@ -29,9 +29,7 @@ namespace Repositories.IslandRepository
 
             using (var connection = new NpgsqlConnection(DbConfiguration.PG_CONNECTION))
             {
-                var islands = connection.Query<Island>(sql).ToList();
-
-                return islands;
+                return connection.Query<Island>(sql).ToList();
             }
         }
 
@@ -45,8 +43,7 @@ namespace Repositories.IslandRepository
             using (var connection = new NpgsqlConnection(DbConfiguration.PG_CONNECTION))
             {
                 _logger.LogInformation($"Creating island with name {createIsland.Name}");
-                var createdIsland = connection.Query<Island>(sql, createIsland);
-                return createdIsland;
+                return connection.Query<Island>(sql, createIsland);
             }
         }
 
@@ -61,14 +58,19 @@ namespace Repositories.IslandRepository
             using (var connection = new NpgsqlConnection(DbConfiguration.PG_CONNECTION))
             {
                 _logger.LogInformation($"Updating island with id {islandId}");
-                var updatedIsland = connection.Query<Island>(sql, updatePayload);
-                return updatedIsland;
+                return connection.Query<Island>(sql, updatePayload);
             }
         }
 
         public void DeleteIsland(Guid islandId)
         {
-            // TODO
+            string sql = $"delete from {TABLE_NAME} where id = @Id;";
+
+            using (var connection = new NpgsqlConnection(DbConfiguration.PG_CONNECTION))
+            {
+                _logger.LogInformation($"Deleting island with id {islandId}");
+                connection.Execute(sql, islandId);
+            }
         }
     }
 }

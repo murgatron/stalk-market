@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Repositories.Interfaces.IVillagerRepository;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Models.CreateVillager;
 using Models.Villager;
+using Repositories.Interfaces;
 
 namespace server.Controllers
 {
@@ -22,35 +23,66 @@ namespace server.Controllers
 
         [HttpGet]
         [Produces("application/json")]
-
         public ActionResult<IEnumerable<Villager>> Get()
         {
             try
             {
-                _logger.LogInformation("Get villager info");
                 return Ok(_repository.GetVillagers());
             }
             catch (Exception e)
             {
                 _logger.LogError(e, "Exception occured trying to get villagers");
-                return Problem(e.Message);
+                // this is stupid
+                return Problem(e.Message, null, int.Parse(System.Net.HttpStatusCode.InternalServerError.ToString()));
             }
         }
 
         [HttpPost]
         [Produces("application/json")]
-        public IEnumerable<Villager> Create([FromBody] CreateVillager villagerToCreate)
+        public ActionResult<IEnumerable<Villager>> Create([FromBody] CreateVillager villagerToCreate)
         {
-            return _repository.CreateVillager(villagerToCreate);
+            try
+            {
+                return Ok(_repository.CreateVillager(villagerToCreate));
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Exception occured trying to create villager");
+                return Problem(e.Message);
+            }
         }
 
-        [HttpPatch]
+        [HttpPatch("{villagerId}")]
         [Produces("application/json")]
-        public IEnumerable<Villager> Update(
+        public ActionResult<IEnumerable<Villager>> Update(
             [FromRoute] Guid villagerId,
             [FromBody] CreateVillager updatePayload)
         {
-            return _repository.UpdateVillager(villagerId, updatePayload);
+            try
+            {
+                return Ok(_repository.UpdateVillager(villagerId, updatePayload));
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Exception occured trying to update villager");
+                return Problem(e.Message);
+            }
+        }
+
+        [HttpDelete("{villagerId}")]
+        [Produces("application/json")]
+        public ActionResult Delete([FromRoute] Guid villagerId)
+        {
+            try
+            {
+                _repository.DeleteVillager(villagerId);
+                return Ok(); // 204 pls
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Exception occured trying to delete villager");
+                return Problem(e.Message);
+            }
         }
     }
 }

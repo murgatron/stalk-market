@@ -1,9 +1,9 @@
-using System.Collections.Generic;
-using Models.Villager;
-using Models.CreateVillager;
 using System;
+using System.Collections.Generic;
+using Models.CreateVillager;
+using Models.Villager;
 
-namespace Interfaces.IVillagerRepository
+namespace Repositories.Interfaces
 {
     public interface IVillagerRepository
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Models.CreateIsland;
 using Models.Island;
 
-namespace Repositories.Interfaces.IIslandRepository
+namespace Repositories.Interfaces
 {
     public interface IIslandRepository
     {
