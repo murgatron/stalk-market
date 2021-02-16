@@ -9,3 +9,15 @@ services:
       POSTGRES_USER: murg
       POSTGRES_PASSWORD: tom-nook-stalks
       POSTGRES_DB: nse
+    networks: 
+      - stalks
+  server: 
+    image: mcr.microsoft.com/dotnet/runtime:5.0
+    ports:
+      - 5000:5000
+      - 5001:5001
+    networks: 
+      - stalks
+
+networks: 
+  stalks:
