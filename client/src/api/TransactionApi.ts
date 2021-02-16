@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { SERVER_HOSTNAME, SERVER_PORT } from "../constants";
-import { ITransaction } from "../interfaces/ITransaction";
+import ITransaction from "../interfaces/ITransaction";
 
 export default class TransactionApi {
   private transactionApi: AxiosInstance;
@@ -23,5 +23,4 @@ export default class TransactionApi {
         throw e;
       });
   }
-
 }

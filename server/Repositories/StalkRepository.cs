@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Dapper;
 using Microsoft.Extensions.Logging;
 using Models.CreateStalk;
 using Models.Stalk;
 using Npgsql;
 using Repositories.Interfaces;
-using System.Text;
 
 namespace Repositories
 {
@@ -23,7 +23,9 @@ namespace Repositories
         }
         public IEnumerable<Stalk> GetStalks()
         {
-            string sql = $"select * from {TABLE_NAME} limit (10)";
+            string sql = new StringBuilder().Append($"select ")
+            .Append("id, island_id as islandId, meridian, shop_price as shopPrice, date, entered_by as enteredBy ")
+            .Append($"from {TABLE_NAME} limit (10)").ToString();
 
             using (var connection = new NpgsqlConnection(DbConfiguration.PG_CONNECTION))
             {

@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Chart from '../components/TurnipChart/Chart';
+import TurnipChart from '../components/TurnipChart/TurnipChart';
 import Deposits from '../components/TopSellers/Deposits';
 import AuthorCredits from '../components/AuthorCredits/AuthorCredits';
 import Transactions from '../components/Transactions/Transactions';
@@ -21,7 +21,7 @@ export default function Dashboard() {
         {/* Chart */}
         <Grid item xs={12} md={8} lg={9}>
           <Paper className={fixedHeightPaper}>
-            <Chart />
+            <TurnipChart />
           </Paper>
         </Grid>
         {/* Recent Deposits */}

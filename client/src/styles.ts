@@ -21,7 +21,7 @@ export const appStyles = makeStyles((theme) => ({
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
-    }),
+    })
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -39,6 +39,7 @@ export const appStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: '#fff'
   },
   drawerPaper: {
     position: 'relative',
@@ -47,7 +48,7 @@ export const appStyles = makeStyles((theme) => ({
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
-    }),
+    })
   },
   drawerPaperClose: {
     overflowX: 'hidden',
@@ -79,4 +80,7 @@ export const appStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  listItemText: {
+    color: theme.palette.text.primary
+  }
 }));

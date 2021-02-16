@@ -1,11 +1,11 @@
-import { AppBar, Avatar, Badge, Button, CssBaseline, IconButton, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Avatar, Button, CssBaseline, IconButton, Toolbar, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import clsx from 'clsx';
 import React from 'react';
 import './App.css';
 import Sidebar from './components/Sidebar/Sidebar';
 import Routes from './Routes';
+import EcoIcon from '@material-ui/icons/Eco';
 import { appStyles } from './styles';
 import { withRouter, Route, Switch } from 'react-router-dom';
 
@@ -35,8 +35,8 @@ function App(props: any) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-              Nook Stalk Exchange
+            <Typography component="h1" variant="h6" style={{ color: '#fff' }} noWrap className={classes.title}>
+              <EcoIcon /> Nook Stalk Exchange
             </Typography>
             <Button color="inherit" startIcon={<Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />}>
               username

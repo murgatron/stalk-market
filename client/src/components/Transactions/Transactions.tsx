@@ -1,8 +1,8 @@
 import { Link, makeStyles, Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
 import React, { useEffect } from "react";
 import TransactionApi from "../../api/TransactionApi";
-import { ITransaction } from "../../interfaces/ITransaction";
-import Title from "../../pages/Title";
+import ITransaction from "../../interfaces/ITransaction";
+import Title from "../Title/Title";
 
 export default function Transactions() {
   const trxApi = new TransactionApi();

@@ -7,6 +7,7 @@ import AllIslands from './pages/AllIslands';
 import BuysAndSells from './pages/BuysAndSells';
 import Dashboard from './pages/Dashboard';
 import YourIsland from './pages/YourIsland';
+import Activity from './pages/Activity';
 
 const Routes = [
   {
@@ -37,7 +38,7 @@ const Routes = [
     path: '/activity',
     sidebarName: 'Activity',
     iconComponent: BarChartIcon,
-    component: BuysAndSells
+    component: Activity
   }
 ];
 

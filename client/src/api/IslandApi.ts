@@ -12,7 +12,14 @@ export default class IslandApi {
   }
 
   public async getIslands(): Promise<IIsland[]> {
-    const response = await this.islandApi.get('');
-    return response.data;
+    return this.islandApi.get('')
+      .then(response => {
+        console.log(response);
+        return response.data;
+      })
+      .catch(e => {
+        console.error(e)
+        throw e;
+      });
   }
 }

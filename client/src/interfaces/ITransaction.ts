@@ -1,6 +1,6 @@
 import { TransactionType } from "./TransactionType";
 
-export interface ITransaction {
+export default interface ITransaction {
   id: string;
   price: number;
   type: TransactionType;

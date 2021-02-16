@@ -36,8 +36,8 @@ export default function Sidebar(props: any) {
         {Routes.map((prop, key) => {
           return (
             <NavLink to={prop.path} key={key} style={{ textDecoration: 'none' }}>
-              <ListItem button selected={activeRoute(prop.path)}>
-                <ListItemIcon>
+              <ListItem button selected={activeRoute(prop.path)} className={classes.listItemText}>
+                <ListItemIcon style={{ color: 'FFE082' }}>
                   <prop.iconComponent />
                 </ListItemIcon>
                 <ListItemText primary={prop.sidebarName} />

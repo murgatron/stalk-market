@@ -1,11 +1,12 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Box, Container, Grid, Paper, Typography } from "@material-ui/core";
-import { appStyles } from '../styles';
+import { appStyles } from "../styles";
+import { Box, Container, Grid, Paper, Typography } from '@material-ui/core';
 import TurnipChart from '../components/TurnipChart/TurnipChart';
 import AuthorCredits from '../components/AuthorCredits/AuthorCredits';
+import Transactions from '../components/Transactions/Transactions';
 
-export default function AllIslands() {
+export default function Activity() {
   const classes = appStyles();
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -13,23 +14,25 @@ export default function AllIslands() {
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Grid container spacing={3}>
-        {/* Stalks Chart */}
+        {/* Common Activities */}
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Typography> Island Stalks </Typography>
+            <Typography> Common Activities </Typography>
             <TurnipChart />
           </Paper>
         </Grid>
-        {/* Island Activity */}
-        <Grid item xs={12}>
+        {/* Active Villagers */}
+        <Grid item xs={12} md={4} lg={3}>
           <Paper className={fixedHeightPaper}>
-            <Typography> Island Stats </Typography>
+            <Typography> Active Villagers </Typography>
+            <TurnipChart />
           </Paper>
         </Grid>
-        {/* More info about stalks */}
-        <Grid item xs={12}>
+        {/* All Activity */}
+        <Grid item xs={12} md={8} lg={9}>
           <Paper className={classes.paper}>
-            <Typography> Island Stalks Table </Typography>
+            <Typography> All Activity </Typography>
+            <Transactions />
           </Paper>
         </Grid>
       </Grid>
