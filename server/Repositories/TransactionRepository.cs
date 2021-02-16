@@ -24,7 +24,7 @@ namespace Repositories
 
         public IEnumerable<Transaction> GetTransactions()
         {
-            string sql = $"select * from {TABLE_NAME} limit (10)";
+            string sql = $"select id, price, type, on_island as onIsland, villager_id as villagerId, quantity, timestamp from {TABLE_NAME} limit (10)";
 
             using (var connection = new NpgsqlConnection(DbConfiguration.PG_CONNECTION))
             {
@@ -37,7 +37,7 @@ namespace Repositories
             string sql = new StringBuilder()
             .Append($"insert into {TABLE_NAME} (price, type, on_island, villager_id, quantity, timestamp) ")
             .Append("values (@Price, @Type, @OnIsland, @VillagerId, @Quantity, @Timestamp) ")
-            .Append("returning (id, name, type, on_island, villager_id, quantity, timestamp);").ToString();
+            .Append("returning (id, name, type, on_island as onIsland, villager_id as villagerId, quantity, timestamp);").ToString();
 
             using (var connection = new NpgsqlConnection(DbConfiguration.PG_CONNECTION))
             {

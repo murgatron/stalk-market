@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using FluentMigrator.Runner;
 using FluentMigrator.Runner.Initialization;
 using Microsoft.AspNetCore.Builder;
@@ -7,9 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Migrations;
-using Repositories.Interfaces;
 using Repositories;
-using System.Text.Json.Serialization;
+using Repositories.Interfaces;
 
 namespace Server
 {
@@ -26,7 +26,17 @@ namespace Server
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost", "http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+                    });
+            });
+
             services.AddControllers().AddJsonOptions(opts => opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "stalks", Version = "v1" });
@@ -37,7 +47,7 @@ namespace Server
                     // Add Postgres support to FluentMigrator
                     .AddPostgres()
                     // Set the connection string
-                    .WithGlobalConnectionString("Server=127.0.0.1;Port=5432;Database=nse;User Id=murg;Password=tom-nook-stalks;")
+                    .WithGlobalConnectionString(DbConfiguration.PG_CONNECTION)
                     // Define the assembly containing the migrations
                     .ScanIn(typeof(InitialMigration).Assembly).For.Migrations())
                 // TODO make this read from some config
@@ -47,6 +57,9 @@ namespace Server
 
             services.AddSingleton<IVillagerRepository, VillagerRepository>();
             services.AddSingleton<IIslandRepository, IslandRepository>();
+            services.AddSingleton<ITransactionRepository, TransactionRepository>();
+            services.AddSingleton<IStalkRepository, StalkRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,9 +72,11 @@ namespace Server
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "stalks v1"));
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 

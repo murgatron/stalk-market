@@ -1,6 +1,7 @@
 using System;
 using Enums;
 using FluentMigrator;
+using Newtonsoft.Json;
 
 namespace Seeds.DevSeed
 {
@@ -42,6 +43,30 @@ namespace Seeds.DevSeed
                 villager_id = murgId,
                 quantity = 300,
                 timestamp = DateTime.Parse("2021-02-13T17:51:42+0000")
+            });
+
+            Insert.IntoTable("stalk")
+            .InSchema("stalkmarket")
+            .Row(new
+            {
+                id = Guid.NewGuid(),
+                island_id = teatimeId,
+                meridian = Meridian.AM,
+                shop_price = 102,
+                date = DateTime.Parse("2021-02-15T00:00:00+0000"),
+                entered_by = murgId
+            });
+
+            Insert.IntoTable("stalk")
+            .InSchema("stalkmarket")
+            .Row(new
+            {
+                id = Guid.NewGuid(),
+                island_id = teatimeId,
+                meridian = Meridian.PM,
+                shop_price = 96,
+                date = DateTime.Parse("2021-02-15T00:00:00+0000"),
+                entered_by = murgId
             });
         }
 
