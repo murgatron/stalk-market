@@ -7,44 +7,44 @@ using Microsoft.Extensions.Logging;
 
 namespace Server
 {
-    public class Program
+  public class Program
+  {
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+      var host = CreateHostBuilder(args).Build();
+
+      // migrate & seed 
+      using (var scope = host.Services.CreateScope())
+      {
+        var services = scope.ServiceProvider;
+
+        try
         {
-            var host = CreateHostBuilder(args).Build();
-
-            // migrate & seed 
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-
-                try
-                {
-                    UpdateDatabase(services);
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred migrating the DB.");
-                }
-            }
-
-            host.Run();
+          UpdateDatabase(services);
         }
-
-        private static void UpdateDatabase(IServiceProvider serviceProvider)
+        catch (Exception ex)
         {
-            // Instantiate the runner
-            var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
-            // Execute the migrations
-            runner.MigrateUp();
+          var logger = services.GetRequiredService<ILogger<Program>>();
+          logger.LogError(ex, "An error occurred migrating the DB.");
         }
+      }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+      host.Run();
     }
+
+    private static void UpdateDatabase(IServiceProvider serviceProvider)
+    {
+      // Instantiate the runner
+      var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
+      // Execute the migrations
+      runner.MigrateUp();
+    }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+              webBuilder.UseStartup<Startup>();
+            });
+  }
 }
