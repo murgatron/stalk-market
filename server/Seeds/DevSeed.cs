@@ -153,6 +153,18 @@ namespace Seeds.DevSeed
         date = DateTime.Parse("2021-02-18T00:00:00+0000"),
         entered_by = murgId
       });
+
+      Insert.IntoTable("stalk")
+      .InSchema("stalkmarket")
+      .Row(new
+      {
+        id = Guid.NewGuid(),
+        island_id = teatimeId,
+        meridian = Meridian.AM,
+        shop_price = 57,
+        date = DateTime.Parse("2021-02-19T00:00:00+0000"),
+        entered_by = murgId
+      });
     }
 
     public override void Down()
