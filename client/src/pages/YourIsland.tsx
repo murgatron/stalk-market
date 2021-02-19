@@ -3,7 +3,7 @@ import React from "react";
 import clsx from 'clsx';
 import AuthorCredits from "../components/AuthorCredits/AuthorCredits";
 import { appStyles } from "../styles";
-import TurnipChart from "../components/TurnipChart/TurnipChart";
+import YourTurnipChart from "../components/YourTurnipChart/YourTurnipChart";
 import Transactions from "../components/Transactions/Transactions";
 
 export default function YourIsland() {
@@ -16,9 +16,9 @@ export default function YourIsland() {
       <Grid container spacing={3}>
         {/* Stalks Chart */}
         <Grid item xs={12}>
-          <Paper className={classes.paper}>
+          <Paper className={fixedHeightPaper}>
             <Typography> Island Stalks </Typography>
-            <TurnipChart />
+            <YourTurnipChart />
           </Paper>
         </Grid>
         {/* About the villager */}

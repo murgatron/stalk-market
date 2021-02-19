@@ -1,8 +1,8 @@
 import { Box, Container, Grid, Paper, Typography } from "@material-ui/core";
-import React, { Fragment } from "react";
+import React from "react";
 import clsx from 'clsx';
 import { appStyles } from "../styles";
-import TurnipChart from "../components/TurnipChart/TurnipChart";
+import YourTurnipChart from "../components/YourTurnipChart/YourTurnipChart";
 import AuthorCredits from "../components/AuthorCredits/AuthorCredits";
 
 export default function BuysAndSells() {
@@ -17,14 +17,14 @@ export default function BuysAndSells() {
         <Grid item xs={12} md={5} lg={5}>
           <Paper className={fixedHeightPaper}>
             <Typography> Buy Graph </Typography>
-            <TurnipChart />
+            <YourTurnipChart />
           </Paper>
         </Grid>
         {/* Sell Graph */}
         <Grid item xs={12} md={5} lg={5}>
           <Paper className={fixedHeightPaper}>
             <Typography> Sell Graph </Typography>
-            <TurnipChart />
+            <YourTurnipChart />
           </Paper>
         </Grid>
         {/* Buy Table */}

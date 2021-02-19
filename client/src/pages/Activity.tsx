@@ -2,7 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { appStyles } from "../styles";
 import { Box, Container, Grid, Paper, Typography } from '@material-ui/core';
-import TurnipChart from '../components/TurnipChart/TurnipChart';
+import YourTurnipChart from '../components/YourTurnipChart/YourTurnipChart';
 import AuthorCredits from '../components/AuthorCredits/AuthorCredits';
 import Transactions from '../components/Transactions/Transactions';
 
@@ -18,14 +18,14 @@ export default function Activity() {
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <Typography> Common Activities </Typography>
-            <TurnipChart />
+            <YourTurnipChart />
           </Paper>
         </Grid>
         {/* Active Villagers */}
         <Grid item xs={12} md={4} lg={3}>
           <Paper className={fixedHeightPaper}>
             <Typography> Active Villagers </Typography>
-            <TurnipChart />
+            <YourTurnipChart />
           </Paper>
         </Grid>
         {/* All Activity */}

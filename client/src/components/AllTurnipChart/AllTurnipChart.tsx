@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useTheme } from '@material-ui/core/styles';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import Title from '../Title/Title';
 import StalkApi from '../../api/StalkApi';
 import IStalk from '../../interfaces/IStalk';
@@ -11,11 +10,12 @@ interface IData {
   amount: number;
 }
 
+// need to accumulate by islandid? series
 const makeDataFromStalks = (stalks: IStalk[]): IData[] => (
-  stalks.map(s => ({ time: s.date.toString(), amount: s.shopPrice }))
+  stalks.map(s => ({ islandId: s.islandId, time: s.date.toString(), amount: s.shopPrice, meridian: s.meridian }))
 )
 
-export default function TurnipChart() {
+export default function AllTurnipChart() {
   const theme = useTheme();
 
   const stalkApi = new StalkApi();
@@ -45,7 +45,10 @@ export default function TurnipChart() {
             left: 24,
           }}
         >
+          <XAxis dataKey="name" />
+          <Tooltip />
           <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
+          <Legend />
           <YAxis stroke={theme.palette.text.secondary}>
             <Label
               angle={270}
@@ -55,7 +58,7 @@ export default function TurnipChart() {
               Shop Price ($B)
             </Label>
           </YAxis>
-          <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={false} />
+          <Line type="monotone" dataKey="amount" name="shop price" stroke={theme.palette.primary.main} dot={false} />
         </LineChart>
       </ResponsiveContainer>
     </React.Fragment>

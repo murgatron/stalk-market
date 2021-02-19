@@ -51,7 +51,7 @@ namespace Server
               // Define the assembly containing the migrations
               .ScanIn(typeof(InitialMigration).Assembly).For.Migrations())
           // TODO make this read from some config
-          // .Configure<RunnerOptions>(cfg => { cfg.Profile = "Development"; })
+          .Configure<RunnerOptions>(cfg => { cfg.Profile = "Development"; })
           // Enable logging to console in the FluentMigrator way
           .AddLogging(lb => lb.AddFluentMigratorConsole());
 

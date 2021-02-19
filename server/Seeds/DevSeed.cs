@@ -1,7 +1,6 @@
 using System;
 using Enums;
 using FluentMigrator;
-using Newtonsoft.Json;
 
 namespace Seeds.DevSeed
 {
