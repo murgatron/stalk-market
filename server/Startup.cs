@@ -31,8 +31,8 @@ namespace Server
         options.AddDefaultPolicy(
                   builder =>
                   {
-                builder.WithOrigins("http://localhost", "http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
-              });
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                  });
       });
 
       services.AddControllers().AddJsonOptions(opts => opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));

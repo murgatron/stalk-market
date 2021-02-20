@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios";
+import https from 'https';
 import { SERVER_HOSTNAME, SERVER_PORT } from "../constants";
 import ITransaction from "../interfaces/ITransaction";
 import ITransactionQueryOptions from "../interfaces/ITransactionQueryOptions";
@@ -8,7 +9,8 @@ export default class TransactionApi {
 
   constructor() {
     this.transactionApi = axios.create({
-      baseURL: `${SERVER_HOSTNAME}:${SERVER_PORT}/api/v1/transactions`
+      baseURL: `${SERVER_HOSTNAME}:${SERVER_PORT}/api/v1/transactions`,
+      httpsAgent: new https.Agent({ rejectUnauthorized: false })
     });
     console.log(this.transactionApi);
   }

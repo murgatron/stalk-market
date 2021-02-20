@@ -8,4 +8,4 @@ done
 dotnet restore
 
 # todo: copy exe build artifact and just run that
-dotnet run
+dotnet run --server-urls "https://*:5001"

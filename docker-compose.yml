@@ -15,9 +15,7 @@ services:
   server: 
     build: ./server
     container_name: dotnet-server
-    # image: mcr.microsoft.com/dotnet/runtime:5.0
     ports:
-      - 5000:5000
       - 5001:5001
     networks: 
       - stalks

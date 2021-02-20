@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios"
+import https from 'https';
 import { SERVER_HOSTNAME, SERVER_PORT } from "../constants";
 import IIsland from "../interfaces/IIsland";
 
@@ -7,7 +8,8 @@ export default class IslandApi {
 
   constructor() {
     this.islandApi = axios.create({
-      baseURL: `${SERVER_HOSTNAME}:${SERVER_PORT}/api/v1/islands`
+      baseURL: `${SERVER_HOSTNAME}:${SERVER_PORT}/api/v1/islands`,
+      httpsAgent: new https.Agent({ rejectUnauthorized: false })
     })
   }
 

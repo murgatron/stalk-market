@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios";
+import https from 'https';
 import { SERVER_HOSTNAME, SERVER_PORT } from "../constants";
 import IStalk from "../interfaces/IStalk";
 
@@ -7,7 +8,8 @@ export default class StalkApi {
 
   constructor() {
     this.stalkApi = axios.create({
-      baseURL: `${SERVER_HOSTNAME}:${SERVER_PORT}/api/v1/stalks`
+      baseURL: `${SERVER_HOSTNAME}:${SERVER_PORT}/api/v1/stalks`,
+      httpsAgent: new https.Agent({ rejectUnauthorized: false })
     });
   }
 
